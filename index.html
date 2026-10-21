@@ -1,1 +1,579 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coleção Feminina Nike & Adidas</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#06130d',
+                            surface: '#0d1f17',
+                            card: '#112218',
+                            border: '#1b3828',
+                            emerald: '#10b981',
+                            accent: '#34d399',
+                            hover: '#059669',
+                            light: '#ecfdf5'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* --- VARIÁVEIS BASEADAS NO MODELO DE CARROSSEL --- */
+        :root {
+            --cor-principal: #1b3828;
+            --cor-secundaria: #10b981;
+            --cor-clara: #ecfdf5;
+            --cor-escura: #06130d;
+            --cor-branca: #ffffff;
+            --cor-accent: #34d399;
+        }
+
+        body {
+            background-color: var(--cor-escura);
+            color: var(--cor-clara);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        /* --- CARROSSEL CSS PURO (ESTRUTURA DO ARQUIVO) --- */
+        /* ESCONDE OS BOTÕES DE RADIO */
+        input[type="radio"].slide-toggle {
+            display: none;
+        }
+
+        /* ÁREA VISÍVEL DO CARROSSEL */
+        .carrossel {
+            overflow: hidden;
+            border: 3px solid var(--cor-principal);
+            border-radius: 1.25rem;
+            position: relative;
+            background-color: #0d1f17;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+        }
+
+        /* CONJUNTO DOS SLIDES */
+        .slides {
+            display: flex;
+            width: 500%;
+            transition: transform 0.5s ease;
+        }
+
+        /* CADA SLIDE */
+        .slide {
+            width: 20%;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .slide figcaption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(6, 19, 13, 0.95), rgba(6, 19, 13, 0));
+            color: var(--cor-branca);
+            padding: 2.5rem 1.5rem 1.5rem 1.5rem;
+        }
+
+        /* MOVIMENTAÇÃO DOS SLIDES (LÓGICA DO ARQUIVO) */
+        #slide1:checked ~ .carrossel .slides { transform: translateX(0); }
+        #slide2:checked ~ .carrossel .slides { transform: translateX(-20%); }
+        #slide3:checked ~ .carrossel .slides { transform: translateX(-40%); }
+        #slide4:checked ~ .carrossel .slides { transform: translateX(-60%); }
+        #slide5:checked ~ .carrossel .slides { transform: translateX(-80%); }
+
+        /* BOTÕES DO CARROSSEL */
+        .botoes {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .botoes label {
+            width: 16px;
+            height: 16px;
+            background-color: var(--cor-principal);
+            border: 2px solid var(--cor-accent);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .botoes label:hover {
+            background-color: var(--cor-accent);
+            transform: scale(1.2);
+        }
+
+        #slide1:checked ~ .botoes label[for="slide1"],
+        #slide2:checked ~ .botoes label[for="slide2"],
+        #slide3:checked ~ .botoes label[for="slide3"],
+        #slide4:checked ~ .botoes label[for="slide4"],
+        #slide5:checked ~ .botoes label[for="slide5"] {
+            background-color: var(--cor-accent);
+            width: 38px;
+            border-radius: 10px;
+        }
+
+        /* RESPONSIVIDADE CELULAR (REGRA DO ARQUIVO) */
+        @media (max-width: 700px) {
+            .slide img {
+                height: 280px;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-brand-emerald selection:text-white">
+
+    <!-- CABEÇALHO DA PÁGINA -->
+    <header class="sticky top-0 z-50 bg-brand-dark/90 backdrop-blur-md border-b border-brand-border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-emerald to-brand-accent flex items-center justify-center text-brand-dark font-extrabold text-xl shadow-lg shadow-brand-emerald/20 group-hover:scale-105 transition-transform">
+                    A
+                </div>
+                <span class="text-xl font-bold tracking-tight text-white group-hover:text-brand-accent transition-colors">AURA<span class="text-brand-accent">SNEAKERS</span></span>
+            </a>
+
+            <nav class="hidden md:flex items-center gap-8 font-medium text-sm">
+                <a href="#destaques" class="hover:text-brand-accent transition-colors">Destaques</a>
+                <a href="#colecao" class="hover:text-brand-accent transition-colors">Coleção Feminina</a>
+                <a href="#diferenciais" class="hover:text-brand-accent transition-colors">Diferenciais</a>
+            </nav>
+
+            <div class="flex items-center gap-4">
+                <button onclick="toggleCarrinho()" class="relative p-2.5 rounded-xl bg-brand-surface border border-brand-border hover:border-brand-accent transition-colors text-white" aria-label="Abrir Carrinho">
+                    <i class="fa-solid fa-bag-shopping text-lg"></i>
+                    <span id="cart-count" class="absolute -top-1.5 -right-1.5 w-5 h-5 bg-brand-emerald text-brand-dark font-bold text-xs rounded-full flex items-center justify-center">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        <!-- SEÇÃO HERO COM CARROSSEL CSS -->
+        <section id="destaques" class="py-12 md:py-16 px-4 max-w-7xl mx-auto">
+            <div class="text-center max-w-3xl mx-auto mb-10">
+                <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-emerald/10 border border-brand-emerald/30 text-brand-accent text-xs font-semibold uppercase tracking-wider mb-4">
+                    <i class="fa-solid fa-sparkles"></i> Lançamentos 2026
+                </span>
+                <h1 class="text-3xl md:text-5xl font-extrabold text-white tracking-tight mb-4">
+                    Tênis Femininos <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-brand-emerald">Nike & Adidas</span>
+                </h1>
+                <p class="text-gray-400 text-base md:text-lg">
+                    Conforto, desempenho e design urbano reunidos nos modelos mais desejados do momento.
+                </p>
+            </div>
+
+            <!-- BOTÕES INVISÍVEIS (INPUTS RADIO DO SEU CÓDIGO) -->
+            <input type="radio" name="carrossel" id="slide1" class="slide-toggle" checked>
+            <input type="radio" name="carrossel" id="slide2" class="slide-toggle">
+            <input type="radio" name="carrossel" id="slide3" class="slide-toggle">
+            <input type="radio" name="carrossel" id="slide4" class="slide-toggle">
+            <input type="radio" name="carrossel" id="slide5" class="slide-toggle">
+
+            <!-- CARROSSEL -->
+            <section class="carrossel max-w-4xl mx-auto">
+                <div class="slides">
+                    <figure class="slide">
+                        <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=1200&q=80" alt="Nike Air Force 1">
+                        <figcaption>
+                            <span class="text-brand-accent text-xs uppercase font-bold tracking-wider">Nike Sportswear</span>
+                            <h3 class="text-xl md:text-2xl font-bold">Nike Air Force 1 '07 SE Feminino</h3>
+                            <p class="text-gray-300 text-sm hidden sm:block mt-1">O ícone do basquete renovado com detalhes sofisticados e máxima durabilidade.</p>
+                        </figcaption>
+                    </figure>
+
+                    <figure class="slide">
+                        <img src="https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?auto=format&fit=crop&w=1200&q=80" alt="Adidas Ultraboost Light">
+                        <figcaption>
+                            <span class="text-brand-accent text-xs uppercase font-bold tracking-wider">Adidas Running</span>
+                            <h3 class="text-xl md:text-2xl font-bold">Adidas Ultraboost Light W</h3>
+                            <p class="text-gray-300 text-sm hidden sm:block mt-1">Amortecimento ultraleve com tecnologia BOOST para alta performance.</p>
+                        </figcaption>
+                    </figure>
+
+                    <figure class="slide">
+                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=1200&q=80" alt="Nike Air Max 270">
+                        <figcaption>
+                            <span class="text-brand-accent text-xs uppercase font-bold tracking-wider">Nike Lifestyle</span>
+                            <h3 class="text-xl md:text-2xl font-bold">Nike Air Max 270 Feminino</h3>
+                            <p class="text-gray-300 text-sm hidden sm:block mt-1">Unidade Air visível que oferece amortecimento superior e estilo inconfundível.</p>
+                        </figcaption>
+                    </figure>
+
+                    <figure class="slide">
+                        <img src="https://images.unsplash.com/photo-1518002171953-a080ee817e1f?auto=format&fit=crop&w=1200&q=80" alt="Adidas Forum Low">
+                        <figcaption>
+                            <span class="text-brand-accent text-xs uppercase font-bold tracking-wider">Adidas Originals</span>
+                            <h3 class="text-xl md:text-2xl font-bold">Adidas Forum Low Vintage</h3>
+                            <p class="text-gray-300 text-sm hidden sm:block mt-1">Silhueta clássica dos anos 80 reinventada em tons suaves para o cotidiano.</p>
+                        </figcaption>
+                    </figure>
+
+                    <figure class="slide">
+                        <img src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?auto=format&fit=crop&w=1200&q=80" alt="Nike Pegasus 40">
+                        <figcaption>
+                            <span class="text-brand-accent text-xs uppercase font-bold tracking-wider">Nike Running</span>
+                            <h3 class="text-xl md:text-2xl font-bold">Nike Pegasus 40 FlyEase W</h3>
+                            <p class="text-gray-300 text-sm hidden sm:block mt-1">Ajuste anatômico e resposta rápida para corridas urbanas e caminhadas.</p>
+                        </figcaption>
+                    </figure>
+                </div>
+            </section>
+
+            <!-- BOTÕES VISÍVEIS (SEU CÓDIGO) -->
+            <div class="botoes">
+                <label for="slide1" title="Slide 1"></label>
+                <label for="slide2" title="Slide 2"></label>
+                <label for="slide3" title="Slide 3"></label>
+                <label for="slide4" title="Slide 4"></label>
+                <label for="slide5" title="Slide 5"></label>
+            </div>
+        </section>
+
+        <!-- CATÁLOGO DE PRODUTOS -->
+        <section id="colecao" class="py-16 bg-brand-surface border-y border-brand-border">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+                    <div>
+                        <h2 class="text-2xl md:text-3xl font-extrabold text-white">Catálogo de Produtos</h2>
+                        <p class="text-gray-400 mt-1">Filtre pelas marcas líderes de mercado</p>
+                    </div>
+
+                    <!-- BOTÕES DE FILTRO -->
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="filtrarProdutos('todos')" id="btn-todos" class="btn-filtro active px-5 py-2.5 rounded-xl text-sm font-semibold border transition-all bg-brand-emerald text-brand-dark border-brand-emerald">
+                            Todos
+                        </button>
+                        <button onclick="filtrarProdutos('nike')" id="btn-nike" class="btn-filtro px-5 py-2.5 rounded-xl text-sm font-semibold border transition-all bg-brand-card text-gray-300 border-brand-border hover:border-brand-accent">
+                            <i class="fa-brands fa-nike mr-1"></i> Nike
+                        </button>
+                        <button onclick="filtrarProdutos('adidas')" id="btn-adidas" class="btn-filtro px-5 py-2.5 rounded-xl text-sm font-semibold border transition-all bg-brand-card text-gray-300 border-brand-border hover:border-brand-accent">
+                            Adidas
+                        </button>
+                    </div>
+                </div>
+
+                <!-- GRID DE PRODUTOS -->
+                <div id="grid-produtos" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Gerado Dinamicamente via JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO DE DIFERENCIAIS -->
+        <section id="diferenciais" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="p-6 rounded-2xl bg-brand-card border border-brand-border hover:border-brand-emerald/50 transition-colors flex flex-col items-center text-center">
+                    <div class="w-14 h-14 rounded-2xl bg-brand-emerald/10 text-brand-accent flex items-center justify-center text-2xl mb-4">
+                        <i class="fa-solid fa-truck-fast"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Envio Rápido & Rastreado</h3>
+                    <p class="text-gray-400 text-sm">Entregas ágeis com acompanhamento em tempo real para todo o país.</p>
+                </div>
+
+                <div class="p-6 rounded-2xl bg-brand-card border border-brand-border hover:border-brand-emerald/50 transition-colors flex flex-col items-center text-center">
+                    <div class="w-14 h-14 rounded-2xl bg-brand-emerald/10 text-brand-accent flex items-center justify-center text-2xl mb-4">
+                        <i class="fa-solid fa-shield-check"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Produtos Autênticos</h3>
+                    <p class="text-gray-400 text-sm">Garantia total de originalidade fornecida pelas marcas oficiais.</p>
+                </div>
+
+                <div class="p-6 rounded-2xl bg-brand-card border border-brand-border hover:border-brand-emerald/50 transition-colors flex flex-col items-center text-center">
+                    <div class="w-14 h-14 rounded-2xl bg-brand-emerald/10 text-brand-accent flex items-center justify-center text-2xl mb-4">
+                        <i class="fa-solid fa-rotate-left"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Troca Descomplicada</h3>
+                    <p class="text-gray-400 text-sm">Política de devolução e troca facilitada em até 30 dias.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- DRAWER / MODAL DO CARRINHO -->
+    <div id="carrinho-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-opacity duration-300">
+        <div id="carrinho-conteudo" class="fixed top-0 right-0 h-full w-full max-w-md bg-brand-surface border-l border-brand-border p-6 transform translate-x-full transition-transform duration-300 flex flex-col justify-between">
+            <div>
+                <div class="flex items-center justify-between pb-4 border-b border-brand-border">
+                    <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-bag-shopping text-brand-accent"></i> Carrinho de Compras
+                    </h3>
+                    <button onclick="toggleCarrinho()" class="text-gray-400 hover:text-white p-2">
+                        <i class="fa-solid fa-xmark text-xl"></i>
+                    </button>
+                </div>
+
+                <div id="carrinho-itens" class="mt-6 space-y-4 max-h-[60vh] overflow-y-auto pr-1">
+                    <p class="text-gray-400 text-center py-8">O teu carrinho está vazio.</p>
+                </div>
+            </div>
+
+            <div class="border-t border-brand-border pt-4">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-gray-400 font-medium">Total:</span>
+                    <span id="carrinho-total" class="text-2xl font-extrabold text-brand-accent">R$ 0,00</span>
+                </div>
+                <button onclick="finalizarCompra()" class="w-full py-3.5 bg-gradient-to-r from-brand-emerald to-brand-accent text-brand-dark font-bold rounded-xl shadow-lg hover:opacity-95 transition-opacity">
+                    Finalizar Pedido
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- RODAPÉ (ESTRUTURA FOOTER DO SEU CÓDIGO) -->
+    <footer>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-400 text-sm">
+            <p class="mb-2">  Projeto de Estudo e Portfólio Front-End</p>
+            <p class="text-xs text-gray-500">Desenvolvido para estudo de HTML e CSS | 2026</p>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT DA APLICAÇÃO -->
+    <script>
+        const produtos = [
+            {
+                id: 1,
+                marca: 'nike',
+                nome: "Nike Air Force 1 '07",
+                categoria: "Casual / Lifestyle",
+                preco: 799.90,
+                imagem: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=600&q=80",
+                tamanhos: [35, 36, 37, 38, 39]
+            },
+            {
+                id: 2,
+                marca: 'adidas',
+                nome: "Adidas Ultraboost Light",
+                categoria: "Corrida / Performance",
+                preco: 1199.90,
+                imagem: "https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?auto=format&fit=crop&w=600&q=80",
+                tamanhos: [34, 35, 36, 37, 38]
+            },
+            {
+                id: 3,
+                marca: 'nike',
+                nome: "Nike Air Max 270",
+                categoria: "Casual",
+                preco: 899.90,
+                imagem: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80",
+                tamanhos: [35, 36, 37, 38]
+            },
+            {
+                id: 4,
+                marca: 'adidas',
+                nome: "Adidas Forum Low",
+                categoria: "Originals",
+                preco: 699.90,
+                imagem: "https://images.unsplash.com/photo-1518002171953-a080ee817e1f?auto=format&fit=crop&w=600&q=80",
+                tamanhos: [35, 36, 37, 38, 39]
+            },
+            {
+                id: 5,
+                marca: 'nike',
+                nome: "Nike Pegasus 40 W",
+                categoria: "Corrida",
+                preco: 999.90,
+                imagem: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?auto=format&fit=crop&w=600&q=80",
+                tamanhos: [36, 37, 38, 39]
+            },
+            {
+                id: 6,
+                marca: 'adidas',
+                nome: "Adidas NMD_R1 W",
+                categoria: "Urban Lifestyle",
+                preco: 849.90,
+                imagem: "https://images.unsplash.com/photo-1582588678413-dbf45f4823e9?auto=format&fit=crop&w=600&q=80",
+                tamanhos: [34, 35, 36, 37, 38]
+            },
+            {
+                id: 7,
+                marca: 'nike',
+                nome: "Nike Dunk Low Retro",
+                categoria: "Streetwear",
+                preco: 899.90,
+                imagem: "https://images.unsplash.com/photo-1597045566677-8cf032ed6634?auto=format&fit=crop&w=600&q=80",
+                tamanhos: [35, 36, 37, 38]
+            },
+            {
+                id: 8,
+                marca: 'adidas',
+                nome: "Adidas Gazelle Bold W",
+                categoria: "Classics",
+                preco: 749.90,
+                imagem: "https://images.unsplash.com/photo-1560769629-975ec94e6a86?auto=format&fit=crop&w=600&q=80",
+                tamanhos: [35, 36, 37, 38, 39]
+            }
+        ];
+
+        let carrinho = [];
+
+        function renderizarProdutos(filtro = 'todos') {
+            const grid = document.getElementById('grid-produtos');
+            grid.innerHTML = '';
+
+            const listaFiltrada = filtro === 'todos' 
+                ? produtos 
+                : produtos.filter(p => p.marca === filtro);
+
+            listaFiltrada.forEach(prod => {
+                const card = document.createElement('div');
+                card.className = "bg-brand-card rounded-2xl border border-brand-border overflow-hidden group hover:border-brand-emerald/60 transition-all flex flex-col justify-between";
+                
+                card.innerHTML = `
+                    <div>
+                        <div class="relative overflow-hidden bg-brand-dark h-56">
+                            <img src="${prod.imagem}" alt="${prod.nome}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-3 left-3 bg-brand-dark/80 backdrop-blur-md px-2.5 py-1 rounded-lg text-xs font-semibold text-brand-accent border border-brand-border uppercase">
+                                ${prod.marca}
+                            </span>
+                        </div>
+                        <div class="p-5">
+                            <span class="text-xs text-gray-400 font-medium">${prod.categoria}</span>
+                            <h3 class="font-bold text-white text-lg mt-1 group-hover:text-brand-accent transition-colors">${prod.nome}</h3>
+                            <p class="text-brand-accent font-extrabold text-xl mt-2">R$ ${prod.preco.toFixed(2).replace('.', ',')}</p>
+                            
+                            <div class="mt-4">
+                                <span class="text-xs text-gray-400 block mb-1.5">Tamanhos:</span>
+                                <div class="flex flex-wrap gap-1.5">
+                                    ${prod.tamanhos.map(t => `<span class="text-xs px-2 py-1 rounded bg-brand-surface text-gray-300 border border-brand-border">${t}</span>`).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-5 pt-0">
+                        <button onclick="adicionarAoCarrinho(${prod.id})" class="w-full py-2.5 rounded-xl bg-brand-emerald/10 border border-brand-emerald/40 text-brand-accent font-semibold hover:bg-brand-emerald hover:text-brand-dark transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-cart-plus"></i> Adicionar
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filtrarProdutos(marca) {
+            document.querySelectorAll('.btn-filtro').forEach(btn => {
+                btn.classList.remove('bg-brand-emerald', 'text-brand-dark', 'border-brand-emerald');
+                btn.classList.add('bg-brand-card', 'text-gray-300', 'border-brand-border');
+            });
+
+            const btnAtivo = document.getElementById(`btn-${marca}`);
+            if (btnAtivo) {
+                btnAtivo.classList.remove('bg-brand-card', 'text-gray-300', 'border-brand-border');
+                btnAtivo.classList.add('bg-brand-emerald', 'text-brand-dark', 'border-brand-emerald');
+            }
+
+            renderizarProdutos(marca);
+        }
+
+        function adicionarAoCarrinho(id) {
+            const produto = produtos.find(p => p.id === id);
+            const itemExistente = carrinho.find(item => item.id === id);
+
+            if (itemExistente) {
+                itemExistente.qtd += 1;
+            } else {
+                carrinho.push({ ...produto, qtd: 1 });
+            }
+
+            atualizarCarrinhoUI();
+            toggleCarrinho(true);
+        }
+
+        function removerDoCarrinho(id) {
+            carrinho = carrinho.filter(item => item.id !== id);
+            atualizarCarrinhoUI();
+        }
+
+        function atualizarCarrinhoUI() {
+            const container = document.getElementById('carrinho-itens');
+            const totalElement = document.getElementById('carrinho-total');
+            const countElement = document.getElementById('cart-count');
+
+            const totalQtd = carrinho.reduce((acc, item) => acc + item.qtd, 0);
+            countElement.innerText = totalQtd;
+
+            if (carrinho.length === 0) {
+                container.innerHTML = '<p class="text-gray-400 text-center py-8">O teu carrinho está vazio.</p>';
+                totalElement.innerText = 'R$ 0,00';
+                return;
+            }
+
+            container.innerHTML = '';
+            let valorTotal = 0;
+
+            carrinho.forEach(item => {
+                valorTotal += item.preco * item.qtd;
+                const itemDiv = document.createElement('div');
+                itemDiv.className = "flex items-center gap-4 bg-brand-card p-3 rounded-xl border border-brand-border";
+                itemDiv.innerHTML = `
+                    <img src="${item.imagem}" alt="${item.nome}" class="w-16 h-16 object-cover rounded-lg">
+                    <div class="flex-grow">
+                        <h4 class="font-bold text-white text-sm">${item.nome}</h4>
+                        <p class="text-brand-accent text-xs font-semibold">R$ ${item.preco.toFixed(2).replace('.', ',')} x ${item.qtd}</p>
+                    </div>
+                    <button onclick="removerDoCarrinho(${item.id})" class="text-gray-400 hover:text-red-400 p-1">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                `;
+                container.appendChild(itemDiv);
+            });
+
+            totalElement.innerText = `R$ ${valorTotal.toFixed(2).replace('.', ',')}`;
+        }
+
+        function toggleCarrinho(forcarAbertura = false) {
+            const modal = document.getElementById('carrinho-modal');
+            const conteudo = document.getElementById('carrinho-conteudo');
+
+            if (forcarAbertura || modal.classList.contains('opacity-0')) {
+                modal.classList.remove('opacity-0', 'pointer-events-none');
+                conteudo.classList.remove('translate-x-full');
+            } else {
+                modal.classList.add('opacity-0', 'pointer-events-none');
+                conteudo.classList.add('translate-x-full');
+            }
+        }
+
+        function finalizarCompra() {
+            if (carrinho.length === 0) {
+                alert("O teu carrinho está vazio!");
+                return;
+            }
+            alert("Pedido efetuado com sucesso! Projeto demonstrativo de portfólio.");
+            carrinho = [];
+            atualizarCarrinhoUI();
+            toggleCarrinho();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderizarProdutos();
+        });
+    </script>
+</body>
+</html>
