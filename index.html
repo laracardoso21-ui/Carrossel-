@@ -6,114 +6,205 @@
     <title>Calçados Femininos</title>
     <style>
         :root {
-            --cor-principal: #800020;
-            --cor-secundaria: #a52a4a;
-            --cor-clara: #f8e8ec;
-            --cor-escura: #4b0013;
+            /* Paleta em Tons de Rosa */
+            --cor-principal: #d8819a;    /* Rosa Médio Chic */
+            --cor-secundaria: #f2b3c1;   /* Rosa Quartzo */
+            --cor-clara: #fdf6f8;        /* Rosé Suave de Fundo */
+            --cor-escura: #5c2231;       /* Vinho/Rosa Fechado para Textos */
             --cor-branca: #ffffff;
+            --cor-hover: #c46882;        /* Rosa Mais Escuro para Passar o Mouse */
+            --cor-destaque: #e8a5b8;     /* Rosa Destaque */
         }
-        *{
+
+        * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
+
         body {
             font-family: Arial, sans-serif;
             background-color: var(--cor-clara);
             color: var(--cor-escura);
         }
+
         header {
             background-color: var(--cor-principal);
             color: var(--cor-branca);
             text-align: center;
-            padding: 30px;
+            padding: 30px 15px;
+            box-shadow: 0 4px 10px rgba(92, 34, 49, 0.15);
         }
+
+        header h1 {
+            font-size: 2rem;
+            margin-bottom: 5px;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+
         main {
             width: 90%;
             max-width: 900px;
             margin: 40px auto;
         }
+
         h2 {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            color: var(--cor-escura);
+            font-size: 1.6rem;
         }
+
         /* ESCONDE OS BOTÕES DE RADIO */
         input[type="radio"] {
             display: none;
         }
+
         /* ÁREA VISÍVEL DO CARROSSEL */
         .carrossel {
             overflow: hidden;
-            border: 5px solid var(--cor-principal);
+            border: 4px solid var(--cor-principal);
             border-radius: 15px;
+            background-color: var(--cor-branca);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
         }
+
         /* CONJUNTO DOS SLIDES */
         .slides {
             display: flex;
             width: 500%;
-            transition: transform 0.5s ease;
+            transition: transform 0.5s ease-in-out;
         }
+
         /* CADA SLIDE */
         .slide {
             width: 20%;
             flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
         }
+
         .slide img {
             width: 100%;
             height: 450px;
             object-fit: cover;
             display: block;
         }
+
         .slide figcaption {
             background-color: var(--cor-principal);
-            color: white;
+            color: var(--cor-branca);
             text-align: center;
-            padding: 15px;
+            padding: 20px 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
         }
+
+        .slide figcaption p {
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        .btn-comprar {
+            display: inline-block;
+            background-color: var(--cor-escura);
+            color: var(--cor-branca);
+            text-decoration: none;
+            padding: 10px 22px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.95rem;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin-top: 5px;
+        }
+
+        .btn-comprar:hover {
+            background-color: #3b141e;
+            transform: translateY(-2px);
+        }
+
         /* MOVIMENTAÇÃO DOS SLIDES */
-        #slide1:checked~.carrossel .slides {
+        #slide1:checked ~ .carrossel .slides {
             transform: translateX(0);
         }
-        #slide2:checked ~.carrossel .slides {
+        #slide2:checked ~ .carrossel .slides {
             transform: translateX(-20%);
         }
-        #slide3:checked ~.carrossel .slides {
+        #slide3:checked ~ .carrossel .slides {
             transform: translateX(-40%);
         }
-        #slide4:checked ~.carrossel .slides {
+        #slide4:checked ~ .carrossel .slides {
             transform: translateX(-60%);
         }
-        #slide5:checked ~.carrossel .slides {
+        #slide5:checked ~ .carrossel .slides {
             transform: translateX(-80%);
         }
-        /* BOTÕES */
+
+        /* BOTÕES NAVEGADORES */
         .botoes {
             display: flex;
             justify-content: center;
-            gap: 10px;
+            gap: 12px;
             margin-top: 20px;
         }
+
         .botoes label {
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             background-color: var(--cor-secundaria);
+            border: 2px solid var(--cor-principal);
             border-radius: 50%;
             cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
         }
+
         .botoes label:hover {
-            background-color: var(--cor-escura);
+            background-color: var(--cor-hover);
+            transform: scale(1.2);
         }
+
+        /* ESTILO DO BOTÃO SELECIONADO */
+        #slide1:checked ~ .botoes label[for="slide1"],
+        #slide2:checked ~ .botoes label[for="slide2"],
+        #slide3:checked ~ .botoes label[for="slide3"],
+        #slide4:checked ~ .botoes label[for="slide4"],
+        #slide5:checked ~ .botoes label[for="slide5"] {
+            background-color: var(--cor-escura);
+            border-color: var(--cor-escura);
+            transform: scale(1.2);
+        }
+
         footer {
             background-color: var(--cor-escura);
-            color: white;
+            color: var(--cor-branca);
             text-align: center;
             padding: 25px;
             margin-top: 40px;
+            font-size: 0.95rem;
         }
-        /* CELULAR */
+
+        /* AJUSTE PARA CELULAR */
         @media (max-width: 700px) {
             .slide img {
                 height: 280px;
+            }
+
+            header h1 {
+                font-size: 1.6rem;
+            }
+
+            header p {
+                font-size: 0.95rem;
+            }
+
+            .slide figcaption p {
+                font-size: 0.9rem;
             }
         }
     </style>
@@ -123,63 +214,13 @@
         <h1>Calçados Femininos</h1>
         <p>A sua melhor escolha em conforto e estilo</p>
     </header>
+
     <main>
         <h2>Conheça nossos modelos</h2>
+
         <!-- BOTÕES INVISÍVEIS -->
         <input type="radio" name="carrossel" id="slide1" checked>
         <input type="radio" name="carrossel" id="slide2">
         <input type="radio" name="carrossel" id="slide3">
         <input type="radio" name="carrossel" id="slide4">
         <input type="radio" name="carrossel" id="slide5">
-        
-        <!-- CARROSSEL -->
-        <section class="carrossel">
-            <div class="slides">
-                <figure class="slide">
-                    <img src="https://assets.adidas.com/images/w_500,f_auto,q_auto/afc2b8818ea449eaac8056a61efec822_9366/Tenis_adidas_Sleek_Prata_JQ2584_01_00_standard.jpg" alt="Tênis Adidas Feminino">
-                    <figcaption>
-                        Tênis Adidas Feminino: Design moderno e tecnologia de amortecimento.
-                    </figcaption>
-                </figure>
-                <figure class="slide">
-                    <img src="https://imgnike-a.akamaihd.net/1920x1920/06088253.jpg" alt="Tênis Nike Feminino">
-                    <figcaption>
-                        Tênis Nike Feminino: Performance e estilo para o seu dia a dia.
-                    </figcaption>
-                </figure>
-                <figure class="slide">
-                    <img src="https://images.tcdn.com.br/img/img_prod/1317970/tenis_adidas_feminino_casual_branco_rosa_brilho_metalico_66747_1_25dafc79f58c0b513da0c9acb8eb2f4d.jpg" alt="Tênis Feminino Exclusivo">
-                    <figcaption>
-                        Tênis Feminino Casual: Elegância e conforto absoluto para todos os momentos.
-                    </figcaption>
-                </figure>
-                <figure class="slide">
-                    <img src="https://grupooscar.vtexassets.com/arquivos/ids/10983280/999999992729000_1.webp?v=639118782718500000" alt="Tênis Urbano">
-                    <figcaption>
-                         Tênis Esportivo Feminino: Leveza e desempenho para o teu estilo ativo.
-                    </figcaption>
-                </figure>
-                <figure class="slide">
-                    <!-- Última foto alterada para tênis feminino -->
-                    <img src="https://imgcentauro-a.akamaihd.net/1300x1300/97360651A9.jpg"alt="Tênis Feminino Esportivo">
-                    <figcaption>
-                       Linha Casual: O toque perfeito de atitude para o seu visual.
-                    </figcaption>
-                </figure>
-            </div>
-        </section>
-        
-        <!-- BOTÕES VISÍVEIS -->
-        <div class="botoes">
-            <label for="slide1"></label>
-            <label for="slide2"></label>
-            <label for="slide3"></label>
-            <label for="slide4"></label>
-            <label for="slide5"></label>
-        </div>
-    </main>
-    <footer>
-        <p>Calçado Feminino </p>
-    </footer>
-</body>
-</html>
